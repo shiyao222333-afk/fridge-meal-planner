@@ -16,7 +16,7 @@
   .phone{width:390px;background:var(--bg);min-height:844px;position:relative;display:flex;flex-direction:column;
     box-shadow:0 20px 60px rgba(0,0,0,.18);overflow:hidden;}
   .statusbar{height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;
-    font-size:14px;font-weight:600;color:var(--text);background:var(--surface);}
+    font-size:14px;font-weight:600;color:var(--text);background:var(--surface);flex:none;}
   .statusbar .icons{display:flex;gap:6px;align-items:center;}
   .dot{width:6px;height:6px;border-radius:50%;background:var(--primary);display:inline-block;}
   .screen{flex:1;overflow-y:auto;padding:18px 18px 92px;display:none;}
@@ -28,6 +28,7 @@
   .brandbar .sub{font-size:12px;color:var(--muted);}
   .pill{background:var(--primary-soft);color:var(--primary);font-size:12px;font-weight:700;
     padding:6px 12px;border-radius:999px;}
+  .pill.btn{cursor:pointer;}
 
   .card{background:var(--surface);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow);margin-bottom:12px;}
   .row{display:flex;align-items:center;gap:12px;}
@@ -48,7 +49,7 @@
   .summary .lbl{font-size:11px;color:var(--muted);margin-top:2px;}
 
   .fab{position:absolute;left:50%;transform:translateX(-50%);bottom:74px;width:58px;height:58px;
-    border-radius:50%;background:var(--primary);color:#fff;font-size:30px;border:none;box-shadow:0 10px 24px rgba(46,125,91,.45);
+    border-radius:50%;background:var(--primary);color:#fff;font-size:30px;border:none;box-shadow:0 10px 24px rgba(46,127,91,.45);
     display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:20;}
   .nav{position:absolute;bottom:0;left:0;right:0;height:64px;background:var(--surface);
     display:flex;box-shadow:0 -4px 20px rgba(31,42,36,.06);padding:0 8px;}
@@ -63,6 +64,7 @@
   .uses{font-size:12px;color:var(--muted);margin-top:4px;}
   .cost-tag{display:inline-block;background:#FCEFD9;color:var(--accent);font-weight:800;font-size:13px;
     padding:3px 10px;border-radius:8px;margin-top:8px;}
+  .meal-card{cursor:pointer;}
 
   /* cost screen */
   .ring-wrap{display:flex;align-items:center;gap:16px;}
@@ -76,12 +78,12 @@
   .bar{height:8px;background:var(--line);border-radius:999px;overflow:hidden;}
   .bar i{display:block;height:100%;border-radius:999px;background:var(--primary);}
   .bar i.a{background:var(--accent);}
-  .save{background:linear-gradient(135deg,#2E7D5B,#3FA776);color:#fff;border-radius:18px;padding:16px;margin-top:4px;}
+  .save{background:linear-gradient(135deg,#2E7D5B,#3FA776);color:#fff;border-radius:18px;padding:16px;margin-top:4px;cursor:pointer;}
   .save .big{font-size:24px;font-weight:800;}
   .save .lbl{font-size:12px;opacity:.9;}
 
   /* my screen */
-  .setting{display:flex;align-items:center;justify-content:space-between;padding:14px 4px;border-bottom:1px solid var(--line);}
+  .setting{display:flex;align-items:center;justify-content:space-between;padding:14px 4px;border-bottom:1px solid var(--line);cursor:pointer;}
   .setting:last-child{border-bottom:none;}
   .setting .k{font-weight:600;font-size:14px;}
   .setting .v{color:var(--muted);font-size:13px;}
@@ -103,6 +105,91 @@
   .toast{position:absolute;bottom:150px;left:50%;transform:translateX(-50%);background:var(--text);color:#fff;
     padding:10px 18px;border-radius:999px;font-size:13px;opacity:0;transition:.3s;z-index:40;pointer-events:none;}
   .toast.show{opacity:1;}
+
+  /* ===== 新增：子屏顶部返回栏 ===== */
+  .topbar{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .back{background:var(--primary-soft);border:none;color:var(--primary);width:36px;height:36px;border-radius:12px;
+    font-size:20px;cursor:pointer;flex:none;display:flex;align-items:center;justify-content:center;font-weight:700;}
+  .topbar h2{font-size:19px;margin:0;font-weight:800;}
+  .topbar .tag{margin-left:auto;font-size:11px;font-weight:700;color:var(--primary);background:var(--primary-soft);padding:5px 10px;border-radius:999px;}
+
+  /* ===== 拍照识别 ===== */
+  .viewfinder{height:230px;border-radius:20px;background:linear-gradient(160deg,#1c2b24,#33473d);
+    position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+  .viewfinder .grid{position:absolute;inset:18px;border:2px dashed rgba(255,255,255,.35);border-radius:14px;}
+  .viewfinder .cam-ic{font-size:46px;opacity:.7;}
+  .viewfinder .scanline{position:absolute;left:18px;right:18px;height:2px;background:var(--accent);
+    box-shadow:0 0 12px var(--accent);animation:scan 1.6s ease-in-out infinite;}
+  @keyframes scan{0%,100%{top:30px;}50%{top:180px;}}
+  .detect-item{display:flex;align-items:center;gap:12px;padding:10px 12px;border:1px solid var(--line);border-radius:14px;margin-bottom:8px;background:var(--surface);}
+  .detect-item.checked{border-color:var(--primary);background:var(--primary-soft);}
+  .detect-item .ck{width:22px;height:22px;border-radius:7px;border:2px solid var(--line);flex:none;display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;}
+  .detect-item.checked .ck{background:var(--primary);border-color:var(--primary);}
+  .hint{font-size:12px;color:var(--muted);text-align:center;margin-top:6px;}
+
+  /* ===== 成就省钱 ===== */
+  .hero-stat{background:linear-gradient(135deg,#2E7D5B,#3FA776);color:#fff;border-radius:20px;padding:20px;margin-bottom:14px;}
+  .hero-stat .big{font-size:34px;font-weight:800;}
+  .hero-stat .lbl{font-size:13px;opacity:.92;margin-top:2px;}
+  .ach-grid{display:flex;gap:10px;}
+  .ach-grid .card{flex:1;margin:0;text-align:center;}
+  .ach-grid .em{font-size:30px;}
+  .ach-grid .t{font-size:13px;font-weight:700;margin-top:6px;}
+  .ach-grid .d{font-size:11px;color:var(--muted);margin-top:2px;}
+  .badge-done{background:var(--primary-soft);color:var(--primary);font-size:11px;font-weight:700;padding:3px 8px;border-radius:8px;display:inline-block;margin-top:6px;}
+
+  /* ===== 学做菜 ===== */
+  .ing-list{padding:0;margin:0 0 12px;}
+  .ing-list li{list-style:none;padding:10px 12px;background:var(--surface);border-radius:12px;margin-bottom:8px;
+    display:flex;align-items:center;gap:10px;box-shadow:var(--shadow);font-size:14px;}
+  .step{display:flex;gap:12px;margin-bottom:14px;}
+  .step .n{width:28px;height:28px;border-radius:50%;background:var(--primary);color:#fff;flex:none;
+    display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;}
+  .step .body{flex:1;}
+  .step .desc{font-size:14px;line-height:1.5;}
+  .step .timer{margin-top:6px;font-size:12px;color:var(--muted);}
+  .step .tbtn{background:var(--primary-soft);color:var(--primary);border:none;border-radius:8px;padding:5px 10px;font-size:12px;font-weight:700;cursor:pointer;}
+  .parallel-tip{background:#FCEFD9;color:#9a6b1e;border-radius:14px;padding:12px 14px;font-size:13px;font-weight:600;margin-bottom:14px;}
+
+  /* ===== 社区 ===== */
+  .post{background:var(--surface);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow);margin-bottom:12px;}
+  .post .head{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+  .post .ava{width:38px;height:38px;border-radius:50%;background:var(--primary-soft);display:flex;align-items:center;justify-content:center;font-size:20px;flex:none;}
+  .post .author{font-weight:700;font-size:14px;}
+  .post .time{font-size:11px;color:var(--muted);}
+  .post .dish-ph{height:150px;border-radius:14px;background:linear-gradient(135deg,#E7F2EC,#cfe6d8);
+    display:flex;align-items:center;justify-content:center;font-size:54px;margin-bottom:10px;}
+  .post .title{font-size:15px;font-weight:700;margin-bottom:8px;}
+  .post .acts{display:flex;gap:18px;color:var(--muted);font-size:13px;}
+  .fab-post{position:absolute;right:18px;bottom:74px;background:var(--accent);color:#fff;border:none;border-radius:999px;
+    padding:12px 18px;font-size:14px;font-weight:700;box-shadow:0 8px 20px rgba(242,165,65,.4);cursor:pointer;z-index:20;display:none;}
+
+  /* ===== VIP ===== */
+  .vip-hero{background:linear-gradient(135deg,#2b2b2b,#4a4a4a);color:#fff;border-radius:20px;padding:18px;margin-bottom:14px;display:flex;align-items:center;gap:14px;}
+  .vip-hero .crown{font-size:40px;}
+  .vip-hero .t{font-size:18px;font-weight:800;}
+  .vip-hero .s{font-size:12px;opacity:.85;margin-top:2px;}
+  .tier{border:2px solid var(--line);border-radius:18px;padding:14px 16px;margin-bottom:12px;}
+  .tier.sel{border-color:var(--primary);background:var(--primary-soft);}
+  .tier .top{display:flex;justify-content:space-between;align-items:center;}
+  .tier .nm{font-weight:800;font-size:16px;}
+  .tier .pr{color:var(--primary);font-weight:800;font-size:18px;}
+  .tier .perk{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.6;}
+  .free-note{font-size:12px;color:var(--muted);text-align:center;margin-top:4px;}
+
+  /* ===== 模型设置 ===== */
+  .seg{display:flex;background:var(--bg);border-radius:14px;padding:4px;margin-bottom:14px;}
+  .seg button{flex:1;border:none;background:transparent;padding:10px;border-radius:11px;font-size:14px;font-weight:700;color:var(--muted);cursor:pointer;}
+  .seg button.on{background:var(--surface);color:var(--primary);box-shadow:var(--shadow);}
+  .toggle-row{display:flex;align-items:center;justify-content:space-between;padding:14px 4px;border-bottom:1px solid var(--line);}
+  .toggle-row:last-child{border-bottom:none;}
+  .toggle-row .k{font-weight:600;font-size:14px;}
+  .toggle-row .k small{display:block;color:var(--muted);font-size:11px;font-weight:400;margin-top:2px;}
+  .switch{width:48px;height:28px;border-radius:999px;background:var(--line);position:relative;flex:none;cursor:pointer;transition:.25s;}
+  .switch.on{background:var(--primary);}
+  .switch i{position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:.25s;}
+  .switch.on i{left:23px;}
+  .model-note{background:var(--primary-soft);border-radius:14px;padding:12px 14px;font-size:12px;color:var(--primary);line-height:1.6;margin-top:4px;}
 </style>
 </head>
 <body>
@@ -116,7 +203,7 @@
   <div class="screen active" id="s-inventory">
     <div class="brandbar">
       <div><h1>我的冰箱</h1><div class="sub">鲜管家 · 今天 7 月 30 日</div></div>
-      <div class="pill">+ 添加</div>
+      <div class="pill btn" onclick="openSub('camera')">📷 拍照</div>
     </div>
     <div class="summary">
       <div class="card"><div class="big" id="itemCount">6</div><div class="lbl">样食材</div></div>
@@ -133,7 +220,7 @@
       <div class="pill" id="mealCost">¥24.5</div>
     </div>
     <div class="meal-type">🌅 早餐</div>
-    <div class="card">
+    <div class="card meal-card" onclick="openCook('番茄炒蛋 + 牛奶')">
       <div class="row"><div class="emoji">🍳</div><div class="grow">
         <div class="dish">番茄炒蛋 + 牛奶</div>
         <div class="uses">用了：鸡蛋、番茄、牛奶</div>
@@ -141,7 +228,7 @@
       </div></div>
     </div>
     <div class="meal-type">☀️ 午餐</div>
-    <div class="card">
+    <div class="card meal-card" onclick="openCook('清炒时蔬 + 鸡胸肉饭')">
       <div class="row"><div class="emoji">🥬</div><div class="grow">
         <div class="dish">清炒时蔬 + 鸡胸肉饭</div>
         <div class="uses">用了：青菜、鸡胸肉、米饭</div>
@@ -149,7 +236,7 @@
       </div></div>
     </div>
     <div class="meal-type">🌙 晚餐</div>
-    <div class="card">
+    <div class="card meal-card" onclick="openCook('青菜肉丸汤 + 馒头')">
       <div class="row"><div class="emoji">🍲</div><div class="grow">
         <div class="dish">青菜肉丸汤 + 馒头</div>
         <div class="uses">用了：青菜、猪肉丸、馒头</div>
@@ -157,7 +244,8 @@
       </div></div>
     </div>
     <div class="card" style="text-align:center;color:var(--muted);font-size:13px;">
-      共消耗库存 6 样 · 比点外卖省约 <b style="color:var(--primary)">¥38</b>
+      共消耗库存 6 样 · 比点外卖省约 <b style="color:var(--primary)">¥38</b><br>
+      <span style="font-size:12px;">点任意一餐可查看「学做菜」引导 👆</span>
     </div>
   </div>
 
@@ -182,9 +270,35 @@
       <div class="card"><div class="big">¥24.5</div><div class="lbl">今日花费</div></div>
       <div class="card"><div class="big">¥86</div><div class="lbl">本周花费</div></div>
     </div>
-    <div class="save">
+    <div class="save" onclick="openSub('achieve')">
       <div class="big">省 ¥38 / 天</div>
-      <div class="lbl">对比同档次外卖，按一周算约省 ¥266</div>
+      <div class="lbl">对比同档次外卖，点击查看「省钱成就」 ›</div>
+    </div>
+  </div>
+
+  <!-- 社区（新增 tab） -->
+  <div class="screen" id="s-community">
+    <div class="brandbar">
+      <div><h1>美食社区</h1><div class="sub">大家一起不浪费</div></div>
+      <div class="pill">🔥 热帖</div>
+    </div>
+    <div class="post">
+      <div class="head"><div class="ava">👩‍🍳</div><div><div class="author">小满厨房</div><div class="time">2 小时前</div></div></div>
+      <div class="dish-ph">🍲</div>
+      <div class="title">冰箱角落三根胡萝卜，做了顿全家夸的咖喱</div>
+      <div class="acts"><span>❤️ 328</span><span>💬 41</span><span>⭐ 收藏</span></div>
+    </div>
+    <div class="post">
+      <div class="head"><div class="ava">🧑‍🍳</div><div><div class="author">减脂的阿杰</div><div class="time">5 小时前</div></div></div>
+      <div class="dish-ph">🥗</div>
+      <div class="title">用鲜管家配餐一周，买菜钱省了 90 块</div>
+      <div class="acts"><span>❤️ 201</span><span>💬 27</span><span>⭐ 收藏</span></div>
+    </div>
+    <div class="post">
+      <div class="head"><div class="ava">👵</div><div><div class="author">王奶奶的家常</div><div class="time">昨天</div></div></div>
+      <div class="dish-ph">🥟</div>
+      <div class="title">剩馒头别扔，煎一煎就是黄金馒头片</div>
+      <div class="acts"><span>❤️ 556</span><span>💬 88</span><span>⭐ 收藏</span></div>
     </div>
   </div>
 
@@ -204,9 +318,123 @@
       <div class="setting"><span class="k">🔔 每日配餐推送</span><span class="v">早 8:00 ›</span></div>
     </div>
     <div class="card">
+      <div class="setting" onclick="openSub('model')"><span class="k">🤖 AI 模型设置</span><span class="v">云端 LLM ›</span></div>
+      <div class="setting" onclick="openSub('vip')"><span class="k">⭐ 鲜管家 VIP</span><span class="v">免费版 ›</span></div>
+      <div class="setting" onclick="go('community',document.querySelectorAll('.nav button')[3])"><span class="k">👥 美食社区</span><span class="v">去逛逛 ›</span></div>
       <div class="setting"><span class="k">📦 未来：冰箱贴摄像头</span><span class="v">敬请期待</span></div>
       <div class="setting"><span class="k">🛒 未来：缺货一键补货</span><span class="v">敬请期待</span></div>
-      <div class="setting"><span class="k">ℹ️ 关于鲜管家</span><span class="v">v0.1.0 原型</span></div>
+      <div class="setting"><span class="k">ℹ️ 关于鲜管家</span><span class="v">v0.2.0 原型</span></div>
+    </div>
+  </div>
+
+  <!-- ===== 拍照识别（子屏） ===== -->
+  <div class="screen" id="s-camera">
+    <div class="topbar">
+      <button class="back" onclick="back()">‹</button>
+      <h2>拍照识别</h2>
+      <span class="tag">v1.1 · 端侧小模型</span>
+    </div>
+    <div class="viewfinder">
+      <div class="grid"></div>
+      <div class="cam-ic">📷</div>
+      <div class="scanline"></div>
+    </div>
+    <button class="btn-primary" onclick="fakeDetect()">📸 拍照并识别食材</button>
+    <div id="detectList" style="margin-top:14px;display:none;">
+      <div class="meal-type">识别到以下食材（可取消勾选）</div>
+      <div id="detectItems"></div>
+      <button class="btn-primary" onclick="saveDetected()">保存到冰箱</button>
+    </div>
+    <div class="hint">离线也能用 · 数据不出手机 · 识别由端侧小模型完成</div>
+  </div>
+
+  <!-- ===== 成就省钱（子屏） ===== -->
+  <div class="screen" id="s-achieve">
+    <div class="topbar">
+      <button class="back" onclick="back()">‹</button>
+      <h2>省钱成就</h2>
+    </div>
+    <div class="hero-stat">
+      <div class="big">¥266</div>
+      <div class="lbl">本月已省（对比同档外卖）</div>
+    </div>
+    <div class="summary">
+      <div class="card"><div class="big">9</div><div class="lbl">顿没浪费</div></div>
+      <div class="card"><div class="big">12</div><div class="lbl">天营养达标</div></div>
+    </div>
+    <div class="meal-type">🏅 已解锁成就</div>
+    <div class="ach-grid">
+      <div class="card"><div class="em">🥉</div><div class="t">一周不浪费</div><div class="d">连续 7 天零丢弃</div><span class="badge-done">已达成</span></div>
+      <div class="card"><div class="em">🏆</div><div class="t">第一桶金</div><div class="d">累计省满 ¥200</div><span class="badge-done">已达成</span></div>
+    </div>
+    <div class="card" style="margin-top:12px;text-align:center;color:var(--muted);font-size:13px;">
+      💡 坚持用鲜管家，把"复杂计算"藏起来，只把"省了多少"亮给你看
+    </div>
+  </div>
+
+  <!-- ===== 学做菜（子屏） ===== -->
+  <div class="screen" id="s-cook">
+    <div class="topbar">
+      <button class="back" onclick="back()">‹</button>
+      <h2 id="cookTitle">学做菜</h2>
+    </div>
+    <div class="parallel-tip">💡 炖汤时可同时炒菜——App 已按你的厨具做并行排程，省时间</div>
+    <div class="meal-type">🧺 需要食材</div>
+    <ul class="ing-list" id="cookIng"></ul>
+    <div class="meal-type">👩‍🍳 步骤</div>
+    <div id="cookSteps"></div>
+    <button class="btn-primary" onclick="showToast('已开始做菜，加油！🍳')">开始做菜</button>
+  </div>
+
+  <!-- ===== VIP（子屏） ===== -->
+  <div class="screen" id="s-vip">
+    <div class="topbar">
+      <button class="back" onclick="back()">‹</button>
+      <h2>鲜管家 VIP</h2>
+    </div>
+    <div class="vip-hero">
+      <div class="crown">👑</div>
+      <div><div class="t">当前：免费版</div><div class="s">基础功能永久免费，升级解锁更省心</div></div>
+    </div>
+    <div class="tier sel" onclick="selTier(this)">
+      <div class="top"><span class="nm">VIP 月卡</span><span class="pr">¥12/月</span></div>
+      <div class="perk">✓ 免广告　✓ 更聪明的 AI 配餐　✓ 多家庭账户</div>
+    </div>
+    <div class="tier" onclick="selTier(this)">
+      <div class="top"><span class="nm">VIP 年卡</span><span class="pr">¥98/年</span></div>
+      <div class="perk">✓ 含月卡全部　✓ 云同步备份　✓ 优先新功能体验（省 46%）</div>
+    </div>
+    <button class="btn-primary" onclick="showToast('VIP 为 v2 规划功能，原型演示 ✨')">升级 VIP</button>
+    <div class="free-note">基础库存 / 配餐 / 花费 永远免费且开源，VIP 只做增值</div>
+  </div>
+
+  <!-- ===== 模型设置（子屏） ===== -->
+  <div class="screen" id="s-model">
+    <div class="topbar">
+      <button class="back" onclick="back()">‹</button>
+      <h2>AI 模型设置</h2>
+    </div>
+    <div class="meal-type">推理方式</div>
+    <div class="seg" id="modelSeg">
+      <button class="on" onclick="setMode('cloud',this)">☁️ 云端 LLM</button>
+      <button onclick="setMode('local',this)">📱 端侧小模型</button>
+    </div>
+    <div id="cloudBox">
+      <div class="field"><label>云端服务商</label>
+        <select><option>DeepSeek</option><option>通义千问</option><option>智谱 GLM</option></select>
+      </div>
+      <div class="model-note">默认走云端，便宜够用；断网或想要隐私时切换到端侧小模型。</div>
+    </div>
+    <div id="localBox" style="display:none;">
+      <div class="toggle-row">
+        <div class="k">隐私优先<small>优先用端侧小模型，数据不出手机</small></div>
+        <div class="switch on" id="swPrivacy" onclick="toggleSw(this)"><i></i></div>
+      </div>
+      <div class="toggle-row">
+        <div class="k">离线可用<small>无网络也能配餐 / 识别</small></div>
+        <div class="switch on" id="swOffline" onclick="toggleSw(this)"><i></i></div>
+      </div>
+      <div class="model-note">端侧小模型在手机本地运行，零服务器成本、断网可用，与「开源 + 隐私信任」定位一致。v1.1 上线。</div>
     </div>
   </div>
 
@@ -232,11 +460,13 @@
 
   <div class="toast" id="toast">已加入冰箱 ✅</div>
 
-  <button class="fab" onclick="openModal()">+</button>
+  <button class="fab" id="fab" onclick="openModal()">+</button>
+  <button class="fab-post" id="fabPost" onclick="showToast('发帖功能为 v2 规划 ✨')">＋ 发布</button>
   <div class="nav">
     <button class="active" onclick="go('inventory',this)"><span class="ic">🧊</span>库存</button>
     <button onclick="go('meals',this)"><span class="ic">🍽️</span>配餐</button>
     <button onclick="go('cost',this)"><span class="ic">📊</span>花费</button>
+    <button onclick="go('community',this)"><span class="ic">👥</span>社区</button>
     <button onclick="go('me',this)"><span class="ic">👤</span>我的</button>
   </div>
 </div>
@@ -251,9 +481,23 @@
     {name:"牛奶",days:4,price:12},
     {name:"猪肉丸",days:2,price:9},
   ];
+  const COOK={
+    '番茄炒蛋 + 牛奶':{ing:['鸡蛋 2 个','西红柿 1 个','牛奶 1 杯'],steps:[
+      {d:'鸡蛋打散，加少许盐搅匀',m:1},{d:'西红柿去蒂切块',m:2},
+      {d:'热锅少油，倒蛋液炒至凝固盛出',m:3},{d:'原锅炒西红柿出汁，回锅蛋翻匀',m:3},
+      {d:'盛盘，配温牛奶一起享用',m:0}]},
+    '清炒时蔬 + 鸡胸肉饭':{ing:['青菜 1 把','鸡胸肉 150g','米饭 1 碗'],steps:[
+      {d:'鸡胸肉切丁，用少许酱油腌一下',m:5},{d:'米饭蒸好备用',m:0},
+      {d:'鸡胸肉少油煎熟盛出',m:4},{d:'青菜下锅快炒，回锅肉丁',m:3},
+      {d:'装盘配米饭',m:0}]},
+    '青菜肉丸汤 + 馒头':{ing:['青菜 1 把','猪肉丸 6 个','馒头 2 个'],steps:[
+      {d:'水烧开下肉丸煮',m:8},{d:'肉丸浮起放青菜煮软',m:3},
+      {d:'加盐调味，盛汤',m:0},{d:'馒头蒸热配汤',m:5}]}
+  };
+
+  let currentTab='inventory', currentBtn=null;
   function badge(d){
     if(d<=1) return ['b-danger','今天坏'];
-    if(d<=2) return ['b-warn','剩'+d+'天'];
     if(d<=4) return ['b-warn','剩'+d+'天'];
     return ['b-ok','剩'+d+'天'];
   }
@@ -273,11 +517,22 @@
     document.getElementById('expSoon').textContent=inventory.filter(i=>i.days<=2).length;
   }
   function go(s,btn){
+    currentTab=s; currentBtn=btn;
     document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
     document.getElementById('s-'+s).classList.add('active');
     document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
+    if(btn) btn.classList.add('active');
+    document.getElementById('fab').style.display = (s==='inventory')?'flex':'none';
+    document.getElementById('fabPost').style.display = (s==='community')?'block':'none';
   }
+  function openSub(s){
+    document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
+    document.getElementById('s-'+s).classList.add('active');
+    document.getElementById('fab').style.display='none';
+    document.getElementById('fabPost').style.display='none';
+  }
+  function back(){ go(currentTab, currentBtn); }
+
   function openModal(){document.getElementById('addModal').classList.add('open');}
   function closeModal(){document.getElementById('addModal').classList.remove('open');}
   function fakeScan(){showToast('识别中… 🔍');setTimeout(()=>{document.getElementById('fName').selectedIndex=0;showToast('已识别：西红柿');},700);}
@@ -288,11 +543,60 @@
     inventory.unshift({name,days,price});
     render(); closeModal(); showToast('已加入冰箱 ✅');
   }
+
+  /* 拍照识别 */
+  const DETECT=[{name:'西红柿',days:5,price:6.5},{name:'鸡蛋',days:12,price:15},{name:'青菜',days:2,price:3},{name:'牛奶',days:4,price:12}];
+  function fakeDetect(){
+    const box=document.getElementById('detectList'); box.style.display='block';
+    const wrap=document.getElementById('detectItems'); wrap.innerHTML='';
+    DETECT.forEach((it,i)=>{
+      const el=document.createElement('div'); el.className='detect-item checked';
+      el.innerHTML=`<div class="ck">✓</div><div class="emoji">${EMOJI[it.name]||'🥦'}</div>
+        <div class="grow"><div class="name">${it.name}</div><div class="meta">保质期约 ${it.days} 天 · ¥${it.price}</div></div>`;
+      el.onclick=()=>{ el.classList.toggle('checked'); const c=el.querySelector('.ck'); c.textContent=el.classList.contains('checked')?'✓':''; };
+      wrap.appendChild(el);
+    });
+    showToast('端侧小模型识别完成 🔍');
+  }
+  function saveDetected(){
+    let n=0;
+    document.querySelectorAll('#detectItems .detect-item.checked').forEach(el=>{
+      const nm=el.querySelector('.name').textContent;
+      const det=DETECT.find(d=>d.name===nm);
+      if(det){ inventory.unshift({name:det.name,days:det.days,price:det.price}); n++; }
+    });
+    render(); back(); showToast('已加入 '+n+' 样食材 ✅');
+  }
+
+  /* 学做菜 */
+  function openCook(dish){
+    const data=COOK[dish]; if(!data) return;
+    document.getElementById('cookTitle').textContent=dish;
+    document.getElementById('cookIng').innerHTML=data.ing.map(i=>`<li>🥬 ${i}</li>`).join('');
+    document.getElementById('cookSteps').innerHTML=data.steps.map((s,i)=>
+      `<div class="step"><div class="n">${i+1}</div><div class="body"><div class="desc">${s.d}</div>
+       ${s.m?`<div class="timer">⏱ 约 ${s.m} 分钟 <button class="tbtn" onclick="showToast('⏱ 计时开始')">计时</button></div>`:''}</div></div>`).join('');
+    openSub('cook');
+  }
+
+  /* VIP 选卡 */
+  function selTier(el){ document.querySelectorAll('.tier').forEach(t=>t.classList.remove('sel')); el.classList.add('sel'); }
+
+  /* 模型设置 */
+  function setMode(mode,btn){
+    document.querySelectorAll('#modelSeg button').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    document.getElementById('cloudBox').style.display = mode==='cloud'?'block':'none';
+    document.getElementById('localBox').style.display = mode==='local'?'block':'none';
+  }
+  function toggleSw(el){ el.classList.toggle('on'); }
+
   let tt; function showToast(msg){
     const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
     clearTimeout(tt); tt=setTimeout(()=>t.classList.remove('show'),1400);
   }
   render();
+  currentBtn=document.querySelector('.nav button.active');
 </script>
 </body>
 </html>
